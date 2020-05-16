@@ -190,7 +190,7 @@ declare -A mtm_moddb_urls
 declare -A mtm_moddb_dependencies
 [ ! -f "$mtm_moddb_path" ] && { echome "$mtm_moddb_path not found"; exit 1; }
 echome "Read $color$mtm_moddb_path$roloc ..."
-while IFS=, read -r mod_aktiv mod_name mod_desc mod_url mod_dep mod_more; do
+while IFS=';' read -r mod_aktiv mod_name mod_desc mod_url mod_dep mod_more; do
   if [ -z "$mod_aktiv" ]; then
     debugme echome "$mod_name at $mod_url dependencies = $mod_dep"
     mtm_moddb_urls+=([$mod_name]="$mod_url")
@@ -228,6 +228,13 @@ setup_mod() {
 
   echo "$mtm_mod_name"
   echo "$mtm_mod_url"
+
+  if [ -z "$mtm_mod_url" ]; then
+    # no url = default mods # ToDo add check for this later 
+    echome "No mod url for $color$mtm_mod_name$roloc. Skip, assuming that it is a default mod. So far no check for it."
+    return
+  fi
+  
 
   # ToDo check noch einbauen (Dir nur prüfen und Änderung nur anzeigen)
   if [ -d "$mtm_mod_name" ]; then
