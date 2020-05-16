@@ -34,7 +34,7 @@ script=$0
 script_command="$(basename $script)"
 script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" # TODO make Symlink Save? # https://stackoverflow.com/a/246128
 script_name="MineTestManager (mtm)"
-script_author="65194270+ShihanAlma@users.noreply.github.com"
+script_author="ShihanAlma (65194270+ShihanAlma@users.noreply.github.com)"
 script_version="0.0.1-dev"
 script_needed_commands="echo dirname basename hash shopt mkdir wget curl unzip git read"
 #script_needed_commands="foo" # for testing only
@@ -190,7 +190,7 @@ declare -A mtm_moddb_urls
 declare -A mtm_moddb_dependencies
 [ ! -f "$mtm_moddb_path" ] && { echome "$mtm_moddb_path not found"; exit 1; }
 echome "Read $color$mtm_moddb_path$roloc ..."
-while IFS=';' read -r mod_aktiv mod_name mod_desc mod_url mod_dep mod_more; do
+while IFS=';' read -r mod_aktiv mod_name mod_url mod_dep mod_desc mod_more; do
   if [ -z "$mod_aktiv" ]; then
     debugme echome "$mod_name at $mod_url dependencies = $mod_dep"
     mtm_moddb_urls+=([$mod_name]="$mod_url")
