@@ -1,4 +1,4 @@
-ingnore if not empty;modname;modurl;dependencies;Tags;Modpack;Notes;edited;moddesc;ModDB URL;Forum URL;imported
+ignore if not empty;modname;modurl;dependencies;Tags;Modpack;Notes;edited;moddesc;ModDB URL;Forum URL;imported
 ;;;;;;;x;;;;
 ;set:ui;;unified_inventory smart_sfinv dreambuilder_hotbar personal_log;;;;x;;;;
 ;set:modhelpers;;datastorage;;;;x;;;;
@@ -6,7 +6,7 @@ ingnore if not empty;modname;modurl;dependencies;Tags;Modpack;Notes;edited;modde
 ;;;;;;;x;;;;
 ;set:doc;;doc doc_basics doc_items doc_encyclopedia doc_identifier doc_minetest_game;;;;x;Set to replace [Modpack] Help;;https://forum.minetest.net/viewtopic.php?t=15912;
 ;;;;;;;x;;;;
-;doc_minetest_game;https://repo.or.cz/minetest_doc_minetest_game.git;default doc_items;doc ui;;ist eigentlich von mehr mods aus mintestgame abhängig. Erstmal nicht alle aufgeführt da eh noch nicht relevant.;x;[Minetest Game item help] Adds help texts for the documentation system mod, topic: blocks, tools, weapons and other items, with a focus on Minetest Game.;;https://forum.minetest.net/viewtopic.php?f=9&t=15224;
+;doc_minetest_game;https://repo.or.cz/minetest_doc_minetest_game.git;default doc_items;doc ui;;ist eigentlich von mehr mods aus mintestgame abhï¿½ngig. Erstmal nicht alle aufgefï¿½hrt da eh noch nicht relevant.;x;[Minetest Game item help] Adds help texts for the documentation system mod, topic: blocks, tools, weapons and other items, with a focus on Minetest Game.;;https://forum.minetest.net/viewtopic.php?f=9&t=15224;
 ;doc_items;http://repo.or.cz/minetest_doc_items.git;doc;doc ui;;;x;[Item Help] Automatically generated help texts of blocks, tools, weapons, crafting items and other items.;;https://forum.minetest.net/viewtopic.php?t=15912;
 ;doc_identifier;http://repo.or.cz/minetest_doc_identifier.git;doc doc_items;doc ui;;;x;[Lookup Tool] Adds a tool which shows a help window with explanations on any block which is punched with it.;;https://forum.minetest.net/viewtopic.php?t=15912;
 ;doc_basics;http://repo.or.cz/minetest_doc_basics.git;doc;doc ui;;;x;[Basic help] A Minetest mod which adds basic gameplay help texts.;;https://forum.minetest.net/viewtopic.php?t=15912;
