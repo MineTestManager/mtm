@@ -28,11 +28,8 @@ debugme #set -vx #TODO an oder aus? #https://wiki.bash-hackers.org/scripting/deb
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' # https://wiki.bash-hackers.org/scripting/debuggingtips#making_xtrace_more_useful
 
 
+# "Config" #####
 
-# Variablen #####
-script=$0
-script_command="$(basename $script)"
-script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" # TODO make Symlink Save? # https://stackoverflow.com/a/246128
 script_name="MineTestManager (mtm)"
 script_author="ShihanAlma (65194270+ShihanAlma@users.noreply.github.com)"
 script_version="0.0.1-dev"
@@ -40,6 +37,14 @@ script_needed_commands="echo dirname basename hash shopt mkdir wget curl unzip g
 #script_needed_commands="foo" # for testing only
 
 mtm_commands="list|check|setup|run"
+mtm_modset_fromgame=(sfinv creative default)
+
+# Variablen #####
+
+script=$0
+script_command="$(basename $script)"
+script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" # TODO make Symlink Save? # https://stackoverflow.com/a/246128
+
 mtm_command="$1"
 mtm_run_path="$(pwd)"
 mtm_rootdir="$(dirname "$script_directory")" # TODO Variante bauen die auch nicht relativ funktioniert
@@ -190,7 +195,7 @@ declare -A mtm_moddb_urls
 declare -A mtm_moddb_dependencies
 [ ! -f "$mtm_moddb_path" ] && { echome "$mtm_moddb_path not found"; exit 1; }
 echome "Read $color$mtm_moddb_path$roloc ..."
-while IFS=';' read -r mod_aktiv mod_name mod_url mod_dep mod_desc mod_more; do
+while IFS=';' read -r mod_aktiv mod_name mod_url mod_dep mod_more; do
   if [ -z "$mod_aktiv" ]; then
     debugme echome "$mod_name at $mod_url dependencies = $mod_dep"
     mtm_moddb_urls+=([$mod_name]="$mod_url")
@@ -209,8 +214,10 @@ build_modset() {
       mtm_modset+=([$1]="$mod_url")
       debugme echome "ModSet = ${!mtm_modset[@]}!"
     fi
-    for item in ${mod_dep[@]}; do
-      build_modset "$item"
+    for item in ${mod_dep[@]}; do 
+      if [[ ! " ${mtm_modset_fromgame[@]} " =~ " ${item} " ]]; then # https://stackoverflow.com/a/15394738
+        build_modset "$item"
+      fi
     done
   else
     echome "No Entry for $color$1$roloc in $color$mtm_moddb_path$roloc!"
@@ -229,11 +236,12 @@ setup_mod() {
   echo "$mtm_mod_name"
   echo "$mtm_mod_url"
 
-  if [ -z "$mtm_mod_url" ]; then
-    # no url = default mods # ToDo add check for this later 
-    echome "No mod url for $color$mtm_mod_name$roloc. Skip, assuming that it is a default mod. So far no check for it."
-    return
-  fi
+  # ToDo default Mods werden jetzt via mtm_modset_fromgame ausgefiltert
+  # if [ -z "$mtm_mod_url" ]; then
+  #   # no url = default mods # ToDo add check for this later 
+  #   echome "No mod url for $color$mtm_mod_name$roloc. Skip, assuming that it is a default mod. So far no check for it."
+  #   return
+  # fi
   
 
   # ToDo check noch einbauen (Dir nur prüfen und Änderung nur anzeigen)
